@@ -17,24 +17,28 @@ class NetworkManager {
         case invalidURL
         case invalidResponse
     }
+    // Private initializer for singleton
+    private init() {}
     
-    private init() {} // Private initializer for singleton
-    
-    // Gets all users from the server
-    func fetchUsers(completion: @escaping ([User]?) -> Void) {
+    // Retrieves all users from the server
+    func getUsers(completion: @escaping ([User]?) -> Void) {
+        // Construct the URL for fetching users
         guard let url = URL(string: "http://localhost:3005/users") else {
             print("Invalid URL")
             completion(nil)
             return
         }
         
+        // Perform a data task to fetch users from the server
         URLSession.shared.dataTask(with: url) { data, response, error in
+            // Check for any errors during the network request
             if let error = error {
                 print("Error fetching users: \(error)")
                 completion(nil)
                 return
             }
             
+            // Check if data was received from the server
             guard let data = data else {
                 print("No data received")
                 completion(nil)
@@ -42,16 +46,21 @@ class NetworkManager {
             }
             
             do {
+                // Attempt to decode the JSON data into UserResponse object
                 let userResponse = try JSONDecoder().decode(UserResponse.self, from: data)
+                // Extract the array of users from the response and pass it to the completion handler
                 completion(userResponse.users.data.rows)
             } catch {
+                // Handle any decoding errors and pass nil to the completion handler
                 print("Error decoding users: \(error)")
                 completion(nil)
             }
+        // Resume the data task to initiate the network request
         }.resume()
     }
+
     
-    /// Searches for a user by ID.
+    // Search for a user by ID
     func searchUserByID(userID: Int, completion: @escaping (User?) -> Void) {
         guard let url = URL(string: "http://localhost:3005/users/\(userID)") else {
             print("Invalid URL")
