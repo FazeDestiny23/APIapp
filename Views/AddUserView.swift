@@ -64,19 +64,19 @@ struct AddUserView: View {
     
     // Function to add a new user
     private func addUser() {
-        // Validate input fields
+        // Validates input fields
         guard !id.isEmpty ,!username.isEmpty, !email.isEmpty, !gender.isEmpty, !location.isEmpty, !birthDate.isEmpty, !weight.isEmpty, !height.isEmpty, !emergencyContact.isEmpty else {
             errorMessage = "All fields are required"
             return
         }
         
-        // Convert weight and height to integers
+        // Converts weight and height to integers
         guard let weightInt = Int(weight), let heightInt = Int(height) else {
             errorMessage = "Invalid weight or height"
             return
         }
         
-        // Create a dictionary with user data
+        // Creates a dictionary with user data
         let userData: [String: Any] = [
             "id": id,
             "username": username,
@@ -89,13 +89,13 @@ struct AddUserView: View {
             "emergencyContact": emergencyContact
         ]
         
-        // Convert the dictionary to JSON data
+        // Converts the dictionary to JSON data
         guard let jsonData = try? JSONSerialization.data(withJSONObject: userData) else {
             errorMessage = "Failed to serialize user data"
             return
         }
         
-        // Make API request to add the user
+        // Makes API request to add the user
         guard let url = URL(string: "http://localhost:3005/users/add") else {
             errorMessage = "Invalid URL"
             return
@@ -108,9 +108,9 @@ struct AddUserView: View {
             if let error = error {
                 errorMessage = "Error adding user: \(error.localizedDescription)"
             } else {
-                // Handle successful response if needed
+                // Handles successful response if needed
                 errorMessage = "User added successfully"
-                // Clear input fields after successful addition
+                // Clears input fields after successful addition
                 DispatchQueue.main.async {
                     clearInputFields()
                 }

@@ -29,16 +29,16 @@ class NetworkManager {
             return
         }
         
-        // Perform a data task to fetch users from the server
+        // Performs a data task to fetch users from the server
         URLSession.shared.dataTask(with: url) { data, response, error in
-            // Check for any errors during the network request
+            // Checks for any errors during the network request
             if let error = error {
                 print("Error fetching users: \(error)")
                 completion(nil)
                 return
             }
             
-            // Check if data was received from the server
+            // Checks if data was received from the server
             guard let data = data else {
                 print("No data received")
                 completion(nil)
@@ -46,78 +46,49 @@ class NetworkManager {
             }
             
             do {
-                // Attempt to decode the JSON data into UserResponse object
+                // Attempts to decode the JSON data into UserResponse object
                 let userResponse = try JSONDecoder().decode(UserResponse.self, from: data)
-                // Extract the array of users from the response and pass it to the completion handler
+                // Extracts the array of users from the response and pass it to the completion handler
                 completion(userResponse.users.data.rows)
             } catch {
-                // Handle any decoding errors and pass nil to the completion handler
+                // Handles any decoding errors and pass nil to the completion handler
                 print("Error decoding users: \(error)")
                 completion(nil)
             }
-        // Resume the data task to initiate the network request
+        // Resumes the data task to initiate the network request
         }.resume()
     }
 
     
-    // Search for a user by ID
-    func searchUserByID(userID: Int, completion: @escaping (User?) -> Void) {
-        guard let url = URL(string: "http://localhost:3005/users/\(userID)") else {
-            print("Invalid URL")
-            completion(nil)
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error fetching user: \(error)")
-                completion(nil)
-                return
-            }
-            
-            guard let data = data else {
-                print("No data received")
-                completion(nil)
-                return
-            }
-            
-            do {
-                let users = try JSONDecoder().decode([User].self, from: data)
-                if let user = users.first {
-                    completion(user)
-                } else {
-                    completion(nil)
-                }
-            } catch {
-                print("Error decoding user: \(error)")
-                completion(nil)
-            }
-        }.resume()
-    }
-    
-    /// Adds a new user to the server.
+    // Adds a new user to the server
     func addUser(user: User) {
+        // Encodes the user object to JSON data
         guard let jsonData = try? JSONEncoder().encode(user) else {
             print("Error encoding user data")
             return
         }
         
+        // Defines the URL for adding a new user
         guard let url = URL(string: "http://localhost:3005/users/add") else {
             print("Invalid URL")
             return
         }
         
+        // Creates a POST request with the JSON data
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
         
+        // Performs the POST request
         URLSession.shared.dataTask(with: request) { data, response, error in
+            // Checks for any errors during the network request
             if let error = error {
                 print("Error adding user: \(error)")
                 return
             }
             
+            // Checks the HTTP response for success or failure
             if let response = response as? HTTPURLResponse {
                 if response.statusCode == 200 {
                     print("User added successfully")
@@ -125,30 +96,43 @@ class NetworkManager {
                     print("Error adding user. Status code: \(response.statusCode)")
                 }
             }
+        // Resumes the data task to initiate the network request
         }.resume()
     }
+
     
-    /// Deletes a user from the server by ID.
+    // Deletes a user from the server by ID
     func deleteUserByID(userID: Int, completion: @escaping (Error?) -> Void) {
+        // Constructs the URL for deleting a user by ID
         guard let url = URL(string: "http://localhost:3005/users/delete/\(userID)") else {
+            // If the URL is invalid, invoke the completion handler with an invalid URL error
             completion(NetworkError.invalidURL)
             return
         }
         
+        // Creates a DELETE request with the specified URL
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         
+        // Performs the DELETE request
         URLSession.shared.dataTask(with: request) { data, response, error in
+            // Checks for any errors during the network request
             if let error = error {
+                // If there's an error, invoke the completion handler with the error
                 completion(error)
                 return
             }
             
+            // Checks the HTTP response for success or failure
             if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                // If the response status code is 200 (OK), invoke the completion handler with nil
                 completion(nil)
             } else {
+                // If the response status code is not 200, invoke the completion handler with an invalid response error
                 completion(NetworkError.invalidResponse)
             }
+        // Resumes the data task to initiate the network request
         }.resume()
     }
+
 }

@@ -16,7 +16,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            // Fetch all users button
+            // Get all users button
             Button("Get All Users") {
                 GetAllUsers()
             }
@@ -25,7 +25,7 @@ struct ContentView: View {
             // List of users
             List(users, id: \.ID) { user in
                 VStack(alignment: .leading) {
-                    // Display user information
+                    // Displays user information
                     Text("ID: \(user.ID)")
                     Text("Username: \(user.Username)")
                     Text("Email: \(user.Email)")
@@ -65,7 +65,7 @@ struct ContentView: View {
                 .padding()
             }
             
-            // Display found user information
+            // Displays found user information
             if let user = user {
                 Text("User Found:")
                 Text("ID: \(user.ID)")
@@ -82,9 +82,9 @@ struct ContentView: View {
         .padding()
     }
     
-    // Get all users function
+    // Gets all users function
     func GetAllUsers() {
-        NetworkManager.shared.fetchUsers { users in
+        NetworkManager.shared.getUsers { users in
             if let users = users {
                 DispatchQueue.main.async {
                     self.users = users
@@ -93,7 +93,7 @@ struct ContentView: View {
         }
     }
     
-    // Search user by ID function
+    // Searchs user by ID function
     func searchUserByID(userID: Int) {
         NetworkManager.shared.searchUserByID(userID: userID) { user in
             if let user = user {
@@ -104,7 +104,7 @@ struct ContentView: View {
         }
     }
     
-    // Delete user by ID function
+    // Deletes user by ID function
     func deleteUserByID(userID: Int) {
         NetworkManager.shared.deleteUserByID(userID: userID) { error in
             if let error = error {
