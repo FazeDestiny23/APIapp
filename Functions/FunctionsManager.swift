@@ -20,7 +20,7 @@ class NetworkManager {
     
     private init() {} // Private initializer for singleton
     
-    /// Fetches all users from the server.
+    // Gets all users from the server
     func fetchUsers(completion: @escaping ([User]?) -> Void) {
         guard let url = URL(string: "http://localhost:3005/users") else {
             print("Invalid URL")
