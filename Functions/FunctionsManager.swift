@@ -58,6 +58,49 @@ class NetworkManager {
         // Resumes the data task to initiate the network request
         }.resume()
     }
+    
+    
+    // Searches for a user by ID on the server
+    func searchUserByID(userID: Int, completion: @escaping (User?) -> Void) {
+        // Constructs the URL to search for a user by ID
+        guard let url = URL(string: "http://localhost:3005/users/\(userID)") else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        // Creates a GET request with the specified URL
+        let request = URLRequest(url: url)
+        
+        // Performs the GET request
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            // Handles the response of the request
+            if let error = error {
+                print("Error searching user by ID: \(error)")
+                completion(nil)
+                return
+            }
+            
+            // Checks if any data was received from the server
+            guard let data = data else {
+                print("No data received")
+                completion(nil)
+                return
+            }
+            
+            do {
+                // Tries to decode the received JSON into a User object
+                let user = try JSONDecoder().decode(User.self, from: data)
+                // Calls the completion handler with the decoded user
+                completion(user)
+            } catch {
+                // Handles any decoding error
+                print("Error decoding user: \(error)")
+                completion(nil)
+            }
+        // Resumes the data task to initiate the network request
+        }.resume()
+    }
 
     
     // Adds a new user to the server
