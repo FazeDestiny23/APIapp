@@ -7,14 +7,27 @@
 
 import Foundation
 
+struct UserResponse: Decodable {
+    let users: UserData
+}
+
+struct UserData: Decodable {
+    let data: UsersData
+    let err: String? 
+}
+
+struct UsersData: Decodable {
+    let rows: [User]
+}
+
 struct User: Decodable, Encodable {
-    var id: Int?
-    var username: String?
-    var email: String?
-    var gender: String?
-    var location: String?
-    var birthDate: Date?
-    var weight: Double?
-    var height: Double?
-    var emergencyContact: String?
+    var ID: Int
+    var Username: String
+    var Email: String
+    var Gender: String
+    var Location: String
+    var BirthDate: String
+    var Weight: Int
+    var Height: Int
+    var EmergencyContact: String
 }

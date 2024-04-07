@@ -6,35 +6,93 @@
 //
 
 import Foundation
-import SwiftKuery
-import SwiftKueryPostgreSQL
 
-struct DatabaseManager {
-    static let shared = DatabaseManager()
-    
-    private let pool: ConnectionPool<PostgreSQLConnection>
-    
-    private init() {
-        let connection = PostgreSQLConnection(
-            host: Environment.dbHost,
-            port: Environment.port,
-            options: [.databaseName(Environment.db)],
-            connectionProperties: [
-                .username(Environment.dbUser),
-                .password(Environment.dbPassword)
-            ]
-        )
-        self.pool = ConnectionPool(options: connection)
+struct APIClient {
+    static let baseURL = URL(string: "http://localhost:3005/users")!
+
+    static func fetchData(completion: @escaping (Result<Data, Error>) -> Void) {
+        let url = baseURL.appendingPathComponent("/api/data")
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            handleResponse(data: data, response: response, error: error, completion: completion)
+        }.resume()
     }
-    
-    func executeQuery(_ query: String) -> EventLoopFuture<PostgreSQLResult> {
-        return self.pool.getConnection().flatMap { connection in
-            let promise = connection.eventLoop.makePromise(of: PostgreSQLResult.self)
-            connection.query(query) { result in
-                promise.completeWith(result)
-                connection.release()
-            }
-            return promise.futureResult
+
+    static func addData(newData: Data, completion: @escaping (Error?) -> Void) {
+        let url = baseURL.appendingPathComponent("/api/data")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = newData
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            handleResponse(data: nil, response: response, error: error, completion: { result in
+                if case .failure(let error) = result {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            })
+        }.resume()
+    }
+
+    static func updateData(updatedData: Data, completion: @escaping (Error?) -> Void) {
+        let url = baseURL.appendingPathComponent("/api/data")
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.httpBody = updatedData
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            handleResponse(data: nil, response: response, error: error, completion: { result in
+                if case .failure(let error) = result {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            })
+        }.resume()
+    }
+
+    static func deleteData(completion: @escaping (Error?) -> Void) {
+        let url = baseURL.appendingPathComponent("/api/data")
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            handleResponse(data: nil, response: response, error: error, completion: { result in
+                if case .failure(let error) = result {
+                    completion(error)
+                } else {
+                    completion(nil)
+                }
+            })
+        }.resume()
+    }
+
+    private static func handleResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping (Result<Data, Error>) -> Void) {
+        if let error = error {
+            completion(.failure(error))
+            return
+        }
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            let unknownError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unknown error"])
+            completion(.failure(unknownError))
+            return
+        }
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            let statusCodeError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)])
+            completion(.failure(statusCodeError))
+            return
+        }
+
+        if let data = data {
+            completion(.success(data))
+        } else {
+            let unknownError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unknown error"])
+            completion(.failure(unknownError))
         }
     }
 }

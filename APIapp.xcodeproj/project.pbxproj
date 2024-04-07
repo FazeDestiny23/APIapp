@@ -14,15 +14,13 @@
 		D6D06BD92BC0F0D400D0BC32 /* APIappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06BD82BC0F0D400D0BC32 /* APIappTests.swift */; };
 		D6D06BE32BC0F0D400D0BC32 /* APIappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06BE22BC0F0D400D0BC32 /* APIappUITests.swift */; };
 		D6D06BE52BC0F0D400D0BC32 /* APIappUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06BE42BC0F0D400D0BC32 /* APIappUITestsLaunchTests.swift */; };
-		D6D06BF62BC0F28800D0BC32 /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06BF52BC0F28800D0BC32 /* Controller.swift */; };
 		D6D06BFB2BC0F3A300D0BC32 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06BFA2BC0F3A300D0BC32 /* Environment.swift */; };
 		D6D06BFF2BC0F7FB00D0BC32 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06BFE2BC0F7FB00D0BC32 /* Routes.swift */; };
 		D6D06C022BC0F97300D0BC32 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06C012BC0F97300D0BC32 /* UserModel.swift */; };
-		D6D06C052BC0FA3200D0BC32 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06C042BC0FA3200D0BC32 /* UserController.swift */; };
 		D6D06C072BC0FE4100D0BC32 /* Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06C062BC0FE4100D0BC32 /* Configure.swift */; };
 		D6D06C0A2BC0FEB800D0BC32 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06C092BC0FEB800D0BC32 /* UserService.swift */; };
-		D6D06C0D2BC10C5F00D0BC32 /* SwiftKuery in Frameworks */ = {isa = PBXBuildFile; productRef = D6D06C0C2BC10C5F00D0BC32 /* SwiftKuery */; };
-		D6D06C102BC10C6F00D0BC32 /* SwiftKueryPostgreSQL in Frameworks */ = {isa = PBXBuildFile; productRef = D6D06C0F2BC10C6F00D0BC32 /* SwiftKueryPostgreSQL */; };
+		D6D06C1F2BC137F400D0BC32 /* FunctionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06C1E2BC137F400D0BC32 /* FunctionsManager.swift */; };
+		D6D06C212BC13AC100D0BC32 /* AddUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D06C202BC13AC100D0BC32 /* AddUserView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,13 +51,13 @@
 		D6D06BDE2BC0F0D400D0BC32 /* APIappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APIappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D06BE22BC0F0D400D0BC32 /* APIappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIappUITests.swift; sourceTree = "<group>"; };
 		D6D06BE42BC0F0D400D0BC32 /* APIappUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIappUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		D6D06BF52BC0F28800D0BC32 /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 		D6D06BFA2BC0F3A300D0BC32 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		D6D06BFE2BC0F7FB00D0BC32 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		D6D06C012BC0F97300D0BC32 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		D6D06C042BC0FA3200D0BC32 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		D6D06C062BC0FE4100D0BC32 /* Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configure.swift; sourceTree = "<group>"; };
 		D6D06C092BC0FEB800D0BC32 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		D6D06C1E2BC137F400D0BC32 /* FunctionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionsManager.swift; sourceTree = "<group>"; };
+		D6D06C202BC13AC100D0BC32 /* AddUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6D06C0D2BC10C5F00D0BC32 /* SwiftKuery in Frameworks */,
-				D6D06C102BC10C6F00D0BC32 /* SwiftKueryPostgreSQL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,11 +88,12 @@
 		D6D06BBB2BC0F0D300D0BC32 = {
 			isa = PBXGroup;
 			children = (
+				D6ECBC092BC2421100D7BC03 /* Views */,
+				D6D06C1D2BC137E200D0BC32 /* Functions */,
 				D6D06C082BC0FEA800D0BC32 /* Services */,
 				D6D06C002BC0F95C00D0BC32 /* Models */,
 				D6D06BFD2BC0F7E700D0BC32 /* Routes */,
 				D6D06BF72BC0F29100D0BC32 /* Configuration */,
-				D6D06BF12BC0F16800D0BC32 /* Controllers */,
 				D6D06BC62BC0F0D300D0BC32 /* APIapp */,
 				D6D06BD72BC0F0D400D0BC32 /* APIappTests */,
 				D6D06BE12BC0F0D400D0BC32 /* APIappUITests */,
@@ -118,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				D6D06BC72BC0F0D300D0BC32 /* APIappApp.swift */,
-				D6D06BC92BC0F0D300D0BC32 /* ContentView.swift */,
 				D6D06BCB2BC0F0D400D0BC32 /* Assets.xcassets */,
 				D6D06BCD2BC0F0D400D0BC32 /* Preview Content */,
 			);
@@ -148,15 +144,6 @@
 				D6D06BE42BC0F0D400D0BC32 /* APIappUITestsLaunchTests.swift */,
 			);
 			path = APIappUITests;
-			sourceTree = "<group>";
-		};
-		D6D06BF12BC0F16800D0BC32 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				D6D06BF52BC0F28800D0BC32 /* Controller.swift */,
-				D6D06C042BC0FA3200D0BC32 /* UserController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D6D06BF72BC0F29100D0BC32 /* Configuration */ = {
@@ -192,6 +179,23 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		D6D06C1D2BC137E200D0BC32 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				D6D06C1E2BC137F400D0BC32 /* FunctionsManager.swift */,
+			);
+			path = Functions;
+			sourceTree = "<group>";
+		};
+		D6ECBC092BC2421100D7BC03 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D6D06C202BC13AC100D0BC32 /* AddUserView.swift */,
+				D6D06BC92BC0F0D300D0BC32 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -209,8 +213,6 @@
 			);
 			name = APIapp;
 			packageProductDependencies = (
-				D6D06C0C2BC10C5F00D0BC32 /* SwiftKuery */,
-				D6D06C0F2BC10C6F00D0BC32 /* SwiftKueryPostgreSQL */,
 			);
 			productName = APIapp;
 			productReference = D6D06BC42BC0F0D300D0BC32 /* APIapp.app */;
@@ -285,8 +287,6 @@
 			);
 			mainGroup = D6D06BBB2BC0F0D300D0BC32;
 			packageReferences = (
-				D6D06C0B2BC10C5F00D0BC32 /* XCRemoteSwiftPackageReference "Swift-Kuery" */,
-				D6D06C0E2BC10C6F00D0BC32 /* XCRemoteSwiftPackageReference "Swift-Kuery-PostgreSQL" */,
 			);
 			productRefGroup = D6D06BC52BC0F0D300D0BC32 /* Products */;
 			projectDirPath = "";
@@ -330,15 +330,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6D06BF62BC0F28800D0BC32 /* Controller.swift in Sources */,
 				D6D06BFB2BC0F3A300D0BC32 /* Environment.swift in Sources */,
 				D6D06C0A2BC0FEB800D0BC32 /* UserService.swift in Sources */,
 				D6D06BFF2BC0F7FB00D0BC32 /* Routes.swift in Sources */,
 				D6D06BCA2BC0F0D300D0BC32 /* ContentView.swift in Sources */,
 				D6D06C072BC0FE4100D0BC32 /* Configure.swift in Sources */,
-				D6D06C052BC0FA3200D0BC32 /* UserController.swift in Sources */,
+				D6D06C1F2BC137F400D0BC32 /* FunctionsManager.swift in Sources */,
 				D6D06C022BC0F97300D0BC32 /* UserModel.swift in Sources */,
 				D6D06BC82BC0F0D300D0BC32 /* APIappApp.swift in Sources */,
+				D6D06C212BC13AC100D0BC32 /* AddUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,38 +662,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		D6D06C0B2BC10C5F00D0BC32 /* XCRemoteSwiftPackageReference "Swift-Kuery" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IBM-Swift/Swift-Kuery.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		D6D06C0E2BC10C6F00D0BC32 /* XCRemoteSwiftPackageReference "Swift-Kuery-PostgreSQL" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IBM-Swift/Swift-Kuery-PostgreSQL.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		D6D06C0C2BC10C5F00D0BC32 /* SwiftKuery */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D6D06C0B2BC10C5F00D0BC32 /* XCRemoteSwiftPackageReference "Swift-Kuery" */;
-			productName = SwiftKuery;
-		};
-		D6D06C0F2BC10C6F00D0BC32 /* SwiftKueryPostgreSQL */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D6D06C0E2BC10C6F00D0BC32 /* XCRemoteSwiftPackageReference "Swift-Kuery-PostgreSQL" */;
-			productName = SwiftKueryPostgreSQL;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D6D06BBC2BC0F0D300D0BC32 /* Project object */;
 }
