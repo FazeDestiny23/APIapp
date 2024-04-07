@@ -89,10 +89,15 @@ class NetworkManager {
             }
             
             do {
-                // Tries to decode the received JSON into a User object
-                let user = try JSONDecoder().decode(User.self, from: data)
-                // Calls the completion handler with the decoded user
-                completion(user)
+                // Tries to decode the received JSON into an array of User objects
+                let users = try JSONDecoder().decode([User].self, from: data)
+                // If the array has at least one user, return the first one (assuming it's unique)
+                if let user = users.first {
+                    completion(user)
+                } else {
+                    print("User not found")
+                    completion(nil)
+                }
             } catch {
                 // Handles any decoding error
                 print("Error decoding user: \(error)")

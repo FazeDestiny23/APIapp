@@ -42,6 +42,9 @@ struct UserService {
     // Function to get a user by ID from the server
     func getUser(id: Int, completion: @escaping (User?, Error?) -> Void) {
         let url = baseURL.appendingPathComponent(String(id))
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
         // Process the response similar to getAllUsers
         // Resumes the data task to initiate the network request

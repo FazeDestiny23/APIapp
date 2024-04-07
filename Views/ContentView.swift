@@ -95,15 +95,20 @@ struct ContentView: View {
     
     // Searchs user by ID function
     func searchUserByID(userID: Int) {
+        print("Searching user with ID: \(userID)")
         NetworkManager.shared.searchUserByID(userID: userID) { user in
             if let user = user {
                 DispatchQueue.main.async {
                     self.user = user
+                    print("User found: \(user)")
                 }
+            } else {
+                print("User not found")
             }
         }
     }
-    
+
+
     // Deletes user by ID function
     func deleteUserByID(userID: Int) {
         NetworkManager.shared.deleteUserByID(userID: userID) { error in
