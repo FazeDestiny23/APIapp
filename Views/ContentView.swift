@@ -43,7 +43,6 @@ struct ContentView: View {
             TextField("Enter User ID", text: $userIDInput)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            
             // Buttons for searching and deleting user by ID
             HStack {
                 Button("Search User By ID") {
